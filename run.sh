@@ -1,26 +1,25 @@
 #!/usr/bin/env bash
+
+# Set the working directory (default: $HOME/workspace)
 WORKDIR=${1:-$HOME/workspace}
+
+# Docker container name
 NAME="jarvis-docker-env"
-USERID=`id -u`
-GROUPID=`id -g`
 
-ARCH=$(uname -m)
-if [[ "$ARCH" == "x86_64" ]]; then
-    TAG="amd64"
-elif [[ "$ARCH" == "arm64" || "$ARCH" == "aarch64" ]]; then
-    TAG="arm64"
-else
-    echo "Unsupported architecture: $ARCH"
-    exit 1
-fi
+# Get current user and group IDs
+USERID=$(id -u)
+GROUPID=$(id -g)
 
-docker stop $NAME
-docker rm -f $NAME
+# Stop and remove any existing container with the same name
+docker stop "$NAME" 2>/dev/null || true
+docker rm -f "$NAME" 2>/dev/null || true
+
+# Run the Docker container with the specified settings
 docker run -it \
---name $NAME \
--e USERID=$USERID \
--e GROUPID=$GROUPID \
--e USERNAME=$USER \
--v $WORKDIR:/workspace \
---entrypoint /files/user_run.sh \
-cnoe-io/jarvis-docker-env:$TAG-latest
+  --name "$NAME" \
+  -e USERID="$USERID" \
+  -e GROUPID="$GROUPID" \
+  -e USERNAME="$USER" \
+  -v "$WORKDIR:/workspace" \
+  --entrypoint /files/user_run.sh \
+  ghcr.io/cnoe-io/jarvis-docker-env:latest
