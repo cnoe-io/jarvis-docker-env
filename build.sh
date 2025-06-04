@@ -6,5 +6,5 @@ cd $REPO_DIR
 docker buildx build \
   --platform linux/amd64,linux/arm64/v8 \
   --force-rm \
-  -t cnoe-io/jarvis-docker-env:latest \
+  -t ghcr.io/cnoe-io/jarvis-docker-env:latest \
   .
