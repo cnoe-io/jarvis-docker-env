@@ -1,4 +1,3 @@
-```
                      ██╗ █████╗ ██████╗ ██╗   ██╗██╗███████╗                    
                      ██║██╔══██╗██╔══██╗██║   ██║██║██╔════╝                    
                      ██║███████║██████╔╝██║   ██║██║███████╗                    
@@ -12,69 +11,3 @@
 ██║  ██║██║   ██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗    ██╔══╝  ██║╚██╗██║╚██╗ ██╔╝
 ██████╔╝╚██████╔╝╚██████╗██║  ██╗███████╗██║  ██║    ███████╗██║ ╚████║ ╚████╔╝ 
 ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚══════╝╚═╝  ╚═══╝  ╚═══╝  
-```
-
-# jarvis-docker-env
-JARVIS Docker Env with all required tooling for Development
-
-## Prerequsits
-- Docker
-- Python
-- Bash
-
-## Env Support
-- tested on mac osx
-- tested on ubuntu
-- windows: TODO
-
-## Super Quick Start <<<<-----
-```
-./run.sh
-```
-mounts $HOME/workspace as /workspace inside container.
-
-## Build [optional]
-1. Ensure you have a personal access token, you can obtain one here: https://sqbu-github.cisco.com/settings/tokens
-1a. echo token to local file or enter when prompted.
-```
-echo "<personal_access_token>" > .git-token
-```
-2. run ./fetch.py to get latest releases from sqbu github
-```
-./fetch.py
-ls -als sqbu-gh-releases 
-```
-3. run ./build.sh to build
-```
-./build.sh
-```
-
-## Push [optional]
-TODO: CI
-you need write access to https://containers.cisco.com/repository/wbx3/wbx3env
-```
-docker push containers.cisco.com/wbx3/wbx3env:latest
-```
-
-## Pull [optional]
-To get the latest
-```
-./pull.sh
-```
-
-## Run
-```
-./run.sh [$WORKDIR]
-```
-Note: $WORKDIR defaults to $HOME/workspace:/workspace
-
-### Attach another shell
-```
-./attach.sh
-```
-
-## Vault envs for kubectl wbx3
-```
-echo "<token>" > .token
-source /envs/mcc[dev|int|prod]
-```
